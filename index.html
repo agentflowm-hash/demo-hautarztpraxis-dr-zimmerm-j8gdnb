@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hautarztpraxis Dr. Zimmermann & Kollegen - Dermatologie in Frankfurt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #002f56;
+      --primary-dark: #002849;
+      --primary-light: #006d8f;
+      --bg: #f8fafc;
+      --bg-alt: #f1f5f9;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    section { padding: 80px 0; }
+    section:nth-child(even) { background: var(--bg-alt); }
+    h1 { font-size: clamp(2.25rem, 5vw, 3.25rem); font-weight: 800; line-height: 1.15; color: var(--text); }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 700; line-height: 1.2; color: var(--text); margin-bottom: 16px; }
+    h3 { font-size: 1.25rem; font-weight: 600; color: var(--text); }
+    p { font-size: 1rem; line-height: 1.7; color: var(--text-muted); }
+    .section-subtitle { font-size: 1.125rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 48px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    @media (max-width: 1024px) {
+      .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      section { padding: 60px 0; }
+      .container { padding: 0 16px; }
+    }
+    header {
+      background: var(--surface);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .mobile-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto 32px;
+      font-size: 1.125rem;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-image {
+      margin-top: 60px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-image img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.15);
+    }
+    .trust-bar {
+      background: var(--surface);
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .trust-items {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .trust-item i {
+      color: var(--primary);
+    }
+    .benefit-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--primary-light);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .benefit-icon i {
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+    .benefits {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .benefit-title {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .services {
+      margin-top: 40px;
+    }
+    .step {
+      text-align: center;
+      max-width: 280px;
+    }
+    .step-number {
+      width: 56px;
+      height: 56px;
+      background: var(--primary);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 auto 20px;
+    }
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .faq-question {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-question i {
+      color: var(--primary);
+    }
+    .faq-answer {
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .cta-section {
+      background: var(--primary);
+      padding: 80px 0;
+      text-align: center;
+    }
+    .cta-section h2 {
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 32px;
+    }
+    .cta-section .btn {
+      background: #ffffff;
+      color: var(--primary);
+    }
+    .cta-section .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    footer {
+      background: #0f172a;
+      color: rgba(255,255,255,0.8);
+      padding: 40px 0;
+      text-align: center;
+    }
+    footer a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: #ffffff;
+    }
+    .footer-links {
+      margin-bottom: 16px;
+    }
+    .footer-links a {
+      margin: 0 16px;
+    }
+    @media (max-width: 768px) {
+      .mobile-toggle { display: block; }
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      .nav-links.active {
+        max-height: 300px;
+      }
+      .nav-links a {
+        padding: 12px 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+  </style>
+
+<script id="wz-kontakt-script">
+document.addEventListener('DOMContentLoaded', function() {
+  var forms = document.querySelectorAll('form');
+  forms.forEach(function(form) {
+    if (form.__wzBound) return;
+    if (form.querySelector('input[type="email"]') && form.querySelector('textarea')) {
+      form.__wzBound = true;
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var fd = new FormData(form);
+        var data = {
+          name: fd.get('name') || fd.get('Name') || '',
+          email: fd.get('email') || fd.get('Email') || '',
+          phone: fd.get('phone') || fd.get('telefon') || '',
+          message: fd.get('message') || fd.get('nachricht') || '',
+          firma: 'Hautarztpraxis Dr. Zimmermann & Kollegen',
+          demo_url: window.location.href
+        };
+        var btn = form.querySelector('button[type="submit"], input[type="submit"]');
+        if (btn) btn.disabled = true;
+
+        fetch('https://6aa2-31-17-18-172.ngrok-free.app/webhook/kontakt-formular', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        })
+        .then(function(r){ return r.json(); })
+        .then(function(res){
+          alert(res && res.success ? 'Danke! Wir melden uns.' : 'Fehler: ' + (res && res.message ? res.message : 'Unbekannt'));
+          if (res && res.success) form.reset();
+        })
+        .catch(function(){
+          alert('Fehler. Bitte kontakt@agentflowm.de kontaktieren.');
+        })
+        .finally(function(){
+          if (btn) btn.disabled = false;
+        });
+      });
+    }
+  });
+});
+</script>
+
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo">Hautarztpraxis Dr. Zimmermann & Kollegen</a>
+      <div class="mobile-toggle"><i class="fa-solid fa-bars"></i></div>
+      <ul class="nav-links">
+        <li><a href="#">Start</a></li>
+        <li><a href="#">Leistungen</a></li>
+        <li><a href="#">Über uns</a></li>
+        <li><a href="#">Kontakt</a></li>
+      </ul>
+      <a href="#" class="btn btn-primary">Termin buchen</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">Dermatologie in Frankfurt</div>
+      <h1>Gesunde Haut, strahlendes Lächeln</h1>
+      <p>Individuelle Hautdiagnostik und moderne Behandlungstechniken für Ihre Hautgesundheit in Frankfurt.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">Termin vereinbaren</a>
+        <a href="#" class="btn btn-outline">Mehr erfahren</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://picsum.photos/900/500?random=1" alt="Dermatologie Behandlung">
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="trust-bar">
+    <div class="container">
+      <div class="trust-items">
+        <div class="trust-item"><i class="fa-solid fa-check"></i> Kostenlose Erstberatung</div>
+        <div class="trust-item"><i class="fa-solid fa-check"></i> Schnelle Terminvergabe</div>
+        <div class="trust-item"><i class="fa-solid fa-check"></i> Faire Preise</div>
+        <div class="trust-item"><i class="fa-solid fa-check"></i> Persönliche Betreuung</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section>
+    <div class="container">
+      <div class="benefits">
+        <div class="benefit-icon"><i class="fa-solid fa-shield-halos"></i></div>
+        <div class="benefit-title">Modernste Technik</div>
+        <p>Wir nutzen neueste Technologien für sichere und effektive Hautbehandlungen.</p>
+      </div>
+      <div class="benefit-icon"><i class="fa-solid fa-smile"></i></div>
+        <div class="benefit-title">Schmerzfreie Verfahren</div>
+        <p>Komfortable Behandlungen ohne unnötige Schmerzen.</p>
+      </div>
+      <div class="benefit-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <div class="benefit-title">Individuelle Betreuung</div>
+        <p>Persönliche Therapiepläne, abgestimmt auf Ihre Bedürfnisse.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section>
+    <div class="container">
+      <div class="section-subtitle">Unsere Leistungen</div>
+      <div class="grid-4">
+        <div class="card">
+          <h3>Hautdiagnostik</h3>
+          <p>Umfassende Analyse Ihrer Hautzustände und -bedürfnisse.</p>
+        </div>
+        <div class="card">
+          <h3>Lasertherapie</h3>
+          <p>Effektive Behandlung von Akne, Pigmentstörungen und Gefäßveränderungen.</p>
+        </div>
+        <div class="card">
+          <h3>Chemische Peelings</h3>
+          <p>Erneuerung der Hautoberfläche für ein frisches Aussehen.</p>
+        </div>
+        <div class="card">
+          <h3>Hautpflegeberatung</h3>
+          <p>Persönliche Empfehlungen für optimale Heimpflege.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Steps -->
+  <section>
+    <div class="container">
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">①</div>
+          <h3>Termin buchen</h3>
+          <p>Wählen Sie online oder rufen Sie an – wir finden schnell einen passenden Termin.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">②</div>
+          <h3>Beratung & Untersuchung</h3>
+          <p>Umfassende Untersuchung und individuelle Behandlungsempfehlungen.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">③</div>
+          <h3>Behandlung & Nachsorge</h3>
+          <p>Professionelle Durchführung und sorgfältige Nachsorge für beste Ergebnisse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <div class="section-subtitle">Häufige Fragen</div>
+      <div class="grid-2">
+        <div class="faq-item">
+          <div class="faq-question"><i class="fa-solid fa-question"></i> Wie lange dauert die Wartezeit?</div>
+          <div class="faq-answer">Die Wartezeit beträgt in der Regel 15–30 Minuten, abhängig von der Auslastung.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question"><i class="fa-solid fa-question"></i> Welche Versicherungen werden akzeptiert?</div>
+          <div class="faq-answer">Wir akzeptieren die gängigen gesetzlichen Krankenkassen sowie private Versicherungen.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question"><i class="fa-solid fa-question"></i> Gibt es schmerzfreie Behandlungsoptionen?</div>
+          <div class="faq-answer">Ja, viele unserer Verfahren sind nahezu schmerzfrei und werden unter lokaler Betäubung durchgeführt.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question"><i class="fa-solid fa-question"></i> Wie erreiche ich die Praxis?</div>
+          <div class="faq-answer">Unsere Praxis befindet sich im Herzen Frankfurts, leicht mit ÖPNV und Auto erreichbar.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Jetzt Termin vereinbaren</h2>
+      <p>Wir freuen uns darauf, Ihre Hautgesundheit zu unterstützen und Ihnen ein strahlendes Lächeln zu schenken.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">Termin buchen</a>
+        <a href="#" class="btn btn-outline">Mehr INFO</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Hautarztpraxis Dr. Zimmermann & Kollegen</p>
+      <div class="footer-links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">Kontakt</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.mobile-toggle');
+    const nav = document.querySelector('.nav-links');
+    if (toggle && nav) {
+      toggle.addEventListener('click', () => nav.classList.toggle('active'));
+    }
+  </script>
+
+<div id="wz-banner" style="
+  position:fixed; bottom:0; left:0; right:0;
+  background:#000;
+  color:#fff;
+  padding:0;
+  z-index:99999;
+  box-shadow: 0 -4px 30px rgba(255,106,0,0.2);
+  font-family: system-ui, -apple-system, sans-serif;
+  border-top: 2px solid #ff6a00;
+">
+  <!-- Hauptbereich -->
+  <div style="
+    max-width:1200px;
+    margin:0 auto;
+    padding:20px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  ">
+    <!-- Links: Badge + Text -->
+    <div style="flex:1; min-width:320px; display:flex; align-items:center; gap:16px;">
+      
+      <!-- Demo Badge -->
+      <div style="
+        background:#111;
+        border: 2px solid #ff6a00;
+        border-radius:10px;
+        padding:10px 14px;
+        text-align:center;
+        flex-shrink:0;
+      ">
+        <div style="font-size:11px; color:#ff6a00; text-transform:uppercase; letter-spacing:1.5px; font-weight:700;">Demo</div>
+        <div style="font-size:14px; font-weight:800; color:#fff; margin-top:2px;">Preview</div>
+      </div>
+      
+      <!-- Haupttext -->
+      <div>
+        <div style="font-size:16px; font-weight:800; color:#fff; line-height:1.3; margin-bottom:6px;">
+          Das ist nur ein <span style="color:#ff6a00;">Vorgeschmack</span>.
+        </div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7); line-height:1.5;">
+          Wir bauen Ihnen das <span style="color:#fff; font-weight:600;">komplette System</span>: 
+          <span style="color:#ff6a00;">Website</span> · 
+          <span style="color:#ff6a00;">App</span> · 
+          <span style="color:#ff6a00;">Verwaltung</span> · 
+          <span style="color:#ff6a00;">Automatisierungen</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rechts: Buttons -->
+    <div style="display:flex; gap:12px; align-items:center; flex-shrink:0;">
+      
+      <!-- Primary CTA -->
+      <a href="https://calendly.com/agentflowm/15min" target="_blank" rel="noopener" style="
+        padding:14px 28px;
+        background:#ff6a00;
+        color:#fff;
+        text-decoration:none;
+        border-radius:8px;
+        font-weight:700;
+        font-size:14px;
+        box-shadow: 0 4px 20px rgba(255,106,0,0.5);
+        white-space:nowrap;
+        border:none;
+      ">Termin vereinbaren</a>
+
+      <!-- Secondary -->
+      <a href="https://www.agentflowm.de" target="_blank" rel="noopener" style="
+        padding:14px 20px;
+        background:transparent;
+        color:#fff;
+        text-decoration:none;
+        border-radius:8px;
+        font-weight:600;
+        font-size:14px;
+        border: 2px solid rgba(255,255,255,0.3);
+        white-space:nowrap;
+      ">Leistungen ansehen</a>
+      
+    </div>
+  </div>
+  
+  <!-- Footer-Zeile -->
+  <div style="
+    background:#111;
+    padding:12px 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  ">
+    <div style="
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:16px;
+    ">
+      <!-- Links: Branding -->
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-size:12px; color:rgba(255,255,255,0.5);">Erstellt von</span>
+        <span style="font-size:13px; font-weight:800; color:#ff6a00;">AgentFlow</span>
+        <span style="font-size:11px; color:rgba(255,255,255,0.4);">– Webseiten & Systeme aus Berlin</span>
+      </div>
+      
+      <!-- Rechts: Trust Points -->
+      <div style="display:flex; align-items:center; gap:20px; font-size:12px;">
+        <span style="color:rgba(255,255,255,0.6);">
+          <span style="color:#ff6a00;">✓</span> Festpreise
+        </span>
+        <span style="color:rgba(255,255,255,0.6);">
+          <span style="color:#ff6a00;">✓</span> In 7 Tagen live
+        </span>
+        <span style="color:rgba(255,255,255,0.6);">
+          <span style="color:#ff6a00;">✓</span> Alles aus einer Hand
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="wz-banner-spacer" style="height:130px"></div>
+
+</body>
+</html>
